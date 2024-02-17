@@ -40,7 +40,7 @@ jobs:
   
 
   test10:
-    name: Vulnerability_Scan_with_Trivy
+    name: Vulnerability Scan_with_Trivy
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
