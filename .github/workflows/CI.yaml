@@ -7,7 +7,7 @@ on:
   push:
     
 #   pull_request:
-#     branches: [ "master" ]
+#     branches: [ "main" ]
 
 jobs:
   build:
@@ -95,10 +95,10 @@ jobs:
           context: ./
           # Note: tags has to be all lower-case
           tags: |
-            yankogp/gitops01:${{ github.sha }} 
+            yankogp/final_project:${{ github.sha }} 
             
           # build on feature branches, push only on main branch
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -111,14 +111,14 @@ jobs:
         with:
           repository: yankogp/gitops-infra
           ref: 'master'
-          token: ${{ secrets.G_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
       - name: setup git config
         run: |
           git config --global user.email "y.patarchanov@gmail.com"
           git config --global user.name "yankogp"
           echo ${{ github.sha }}
-          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/gitops01:${{ github.sha }}#g" deployment.yaml
+          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/final_project:${{ github.sha }}#g" deployment.yaml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
       - run: echo ${{ github }}
-      - run: git push origin master
+      - run: git push origin main
