@@ -3,11 +3,7 @@
 name: Build Step
 
 on:
-  push:    
-  
-    
-
-    
+  push:        
 
 
 jobs:
