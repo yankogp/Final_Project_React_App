@@ -33,7 +33,8 @@ jobs:
       - name: Running Tests
         uses: actions/checkout@v3
 
-     
+      - name: Run EditorConfig Checker
+        uses: editorconfig-checker/action-editorconfig-checker@main   
       
 
   Gitleaks_test:    
