@@ -35,6 +35,9 @@ jobs:
 
       - name: Run EditorConfig Checker
         uses: editorconfig-checker/action-editorconfig-checker@main   
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v6.1.1  # x-release-please-version
       
 
   Gitleaks_test:    
