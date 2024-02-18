@@ -1,16 +1,15 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
 
 name: Build Step
 
 on:
   push:
+    branch: main
   pull_request:
     branch: main
 
     
-#   pull_request:
-#     branches: [ "main" ]
+
 
 jobs:
   build:
@@ -18,7 +17,7 @@ jobs:
     strategy:
       matrix:
         node-version: [21.6.2]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        
 
     steps:
       - uses: actions/checkout@v3
@@ -28,11 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run build --if-present
-
-  
-
-  
+      - run: npm run build --if-present  
 
  
 
@@ -75,7 +70,7 @@ jobs:
     name: Build Docker image and push to repositories
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-latest
-    needs: ['build', 'test-stage']
+    needs: ['build', 'test-stage', 'Trivy_test', 'Gitleaks_test']
 
     # steps to perform in job
     steps:
