@@ -3,10 +3,9 @@
 name: Build Step
 
 on:
-  push:
-    branch: main
-  pull_request:
-    branch: main
+  push:    
+  
+    
 
     
 
@@ -103,6 +102,9 @@ jobs:
             
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Image scan
+        run: trivy image yankogp/final_project:latest > trivyimage.txt
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
